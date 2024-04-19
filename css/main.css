@@ -1,3 +1,6 @@
+body {
+  background: url("/images/background.jpg");
+}
 :root {
   --width-main: 720px;
   --fsp: 17px;
