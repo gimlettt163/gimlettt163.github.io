@@ -335,7 +335,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-06-04 17:36:21" itemprop="dateModified" datetime="2024-06-04T17:36:21+08:00">2024-06-04</time>
+                <time title="修改时间：2024-06-04 17:37:12" itemprop="dateModified" datetime="2024-06-04T17:37:12+08:00">2024-06-04</time>
               </span>
 
           
@@ -350,23 +350,6 @@
 
       
           <h1 id="使用TrainAPI微调模型"><a href="#使用TrainAPI微调模型" class="headerlink" title="使用TrainAPI微调模型"></a>使用TrainAPI微调模型</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> Trainer</span><br><span class="line"></span><br><span class="line">trainer = Trainer(</span><br><span class="line">    model,</span><br><span class="line">    training_args,</span><br><span class="line">    train_dataset=tokenized_datasets[<span class="string">&quot;train&quot;</span>],</span><br><span class="line">    eval_dataset=tokenized_datasets[<span class="string">&quot;validation&quot;</span>],</span><br><span class="line">    data_collator=data_collator,</span><br><span class="line">    tokenizer=tokenizer,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>model：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoModelForSequenceClassification</span><br><span class="line"></span><br><span class="line">model = AutoModelForSequenceClassification.from_pretrained(checkpoint, num_labels=<span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-
-<p>training_args：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">from transformers import TrainingArguments</span><br><span class="line"></span><br><span class="line">training_args = TrainingArguments(&quot;test-trainer&quot;)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>在我们定义我们的 <strong>Trainer</strong> 之前首先要定义一个 <strong>TrainingArguments</strong> 类，它将包含 <strong>Trainer</strong>用于训练和评估的所有超参数。您唯一必须提供的参数是保存训练模型的目录，以及训练过程中的检查点。对于其余的参数，您可以保留默认值，这对于基本微调应该非常有效。</p>
-</blockquote>
-<p>data_collator：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data_collator = DataCollatorWithPadding(tokenizer=tokenizer)</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>为了解决句子长度统一的问题，我们必须定义一个collate函数，该函数会将每个batch句子填充到正确的长度。幸运的是，🤗transformer库通过<strong>DataCollatorWithPadding</strong>为我们提供了这样一个函数。当你实例化它时，需要一个标记器(用来知道使用哪个词来填充，以及模型期望填充在左边还是右边)，并将做你需要的一切</p>
-</blockquote>
-<p>微调命令：trainer.train()</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/04/22/HuggingFace%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-%E7%AC%AC%E4%B8%89%E7%AB%A0/#more" rel="contents">
