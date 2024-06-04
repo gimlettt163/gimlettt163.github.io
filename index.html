@@ -168,10 +168,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-04-24 10:11:28 / 修改时间：21:08:37" itemprop="dateCreated datePublished" datetime="2024-04-24T10:11:28+08:00">2024-04-24</time>
+              <time title="创建时间：2024-04-24 10:11:28" itemprop="dateCreated datePublished" datetime="2024-04-24T10:11:28+08:00">2024-04-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-06-04 17:36:27" itemprop="dateModified" datetime="2024-06-04T17:36:27+08:00">2024-06-04</time>
+              </span>
 
           
 
@@ -199,7 +205,14 @@
 </ol>
 </blockquote>
 <p>数据处理。需要时再整理。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/04/24/HuggingFace%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-%E7%AC%AC%E4%BA%94%E7%AB%A0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -241,10 +254,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-04-24 10:07:57 / 修改时间：21:02:15" itemprop="dateCreated datePublished" datetime="2024-04-24T10:07:57+08:00">2024-04-24</time>
+              <time title="创建时间：2024-04-24 10:07:57" itemprop="dateCreated datePublished" datetime="2024-04-24T10:07:57+08:00">2024-04-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-06-04 17:36:24" itemprop="dateModified" datetime="2024-06-04T17:36:24+08:00">2024-06-04</time>
+              </span>
 
           
 
@@ -259,7 +278,14 @@
       
           <h1 id="分享预训练模型"><a href="#分享预训练模型" class="headerlink" title="分享预训练模型"></a>分享预训练模型</h1><p>使用使用 push_to_hub API将训练的检查点共享到HF社区</p>
 <p>There’s nothing much to say.</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/04/24/HuggingFace%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-%E7%AC%AC%E5%9B%9B%E7%AB%A0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -309,7 +335,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2024-04-23 12:53:32" itemprop="dateModified" datetime="2024-04-23T12:53:32+08:00">2024-04-23</time>
+                <time title="修改时间：2024-06-04 17:36:21" itemprop="dateModified" datetime="2024-06-04T17:36:21+08:00">2024-06-04</time>
               </span>
 
           
@@ -341,14 +367,14 @@
 <p>为了解决句子长度统一的问题，我们必须定义一个collate函数，该函数会将每个batch句子填充到正确的长度。幸运的是，🤗transformer库通过<strong>DataCollatorWithPadding</strong>为我们提供了这样一个函数。当你实例化它时，需要一个标记器(用来知道使用哪个词来填充，以及模型期望填充在左边还是右边)，并将做你需要的一切</p>
 </blockquote>
 <p>微调命令：trainer.train()</p>
-<h2 id="评估"><a href="#评估" class="headerlink" title="评估"></a>评估</h2><p>先定义一个评估函数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">compute_metrics</span>(<span class="params">eval_preds</span>):</span><br><span class="line">    metric = evaluate.load(<span class="string">&quot;glue&quot;</span>, <span class="string">&quot;mrpc&quot;</span>)</span><br><span class="line">    logits, labels = eval_preds</span><br><span class="line">    predictions = np.argmax(logits, axis=-<span class="number">1</span>)</span><br><span class="line">    <span class="keyword">return</span> metric.compute(predictions=predictions, references=labels)</span><br></pre></td></tr></table></figure>
-
-<p>再在上文的Trainer类中添加compute_metrics&#x3D;compute_metrics，如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">training_args = TrainingArguments(<span class="string">&quot;test-trainer&quot;</span>, evaluation_strategy=<span class="string">&quot;epoch&quot;</span>)</span><br><span class="line">model = AutoModelForSequenceClassification.from_pretrained(checkpoint, num_labels=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">trainer = Trainer(</span><br><span class="line">    model,</span><br><span class="line">    training_args,</span><br><span class="line">    train_dataset=tokenized_datasets[<span class="string">&quot;train&quot;</span>],</span><br><span class="line">    eval_dataset=tokenized_datasets[<span class="string">&quot;validation&quot;</span>],</span><br><span class="line">    data_collator=data_collator,</span><br><span class="line">    tokenizer=tokenizer,</span><br><span class="line">    compute_metrics=compute_metrics,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<p>记得注意以下batch相关的检验。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/04/22/HuggingFace%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-%E7%AC%AC%E4%B8%89%E7%AB%A0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -390,10 +416,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2024-04-22 13:40:07 / 修改时间：16:47:10" itemprop="dateCreated datePublished" datetime="2024-04-22T13:40:07+08:00">2024-04-22</time>
+              <time title="创建时间：2024-04-22 13:40:07" itemprop="dateCreated datePublished" datetime="2024-04-22T13:40:07+08:00">2024-04-22</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-06-04 17:36:15" itemprop="dateModified" datetime="2024-06-04T17:36:15+08:00">2024-06-04</time>
+              </span>
 
           
 
@@ -412,59 +444,14 @@
 <li>model</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> pipeline</span><br><span class="line"></span><br><span class="line">classifier = pipeline(<span class="string">&quot;sentiment-analysis&quot;</span>)<span class="comment">#可指定模型</span></span><br><span class="line">classifier(</span><br><span class="line">    [</span><br><span class="line">        <span class="string">&quot;I&#x27;ve been waiting for a HuggingFace course my whole life.&quot;</span>,</span><br><span class="line">        <span class="string">&quot;I hate this so much!&quot;</span>,</span><br><span class="line">    ]</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
-
-<h1 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h1><p>除了import pipeline外，还可以通过import model的方式调用模型</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> BertConfig, BertModel</span><br><span class="line"></span><br><span class="line"><span class="comment"># Building the config</span></span><br><span class="line">config = BertConfig()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Building the model from the config</span></span><br><span class="line">model = BertModel(config)</span><br></pre></td></tr></table></figure>
-
-<p>在model &#x3D; BertModel(config)中，参数除了config外，还可以是检查点。</p>
-<p>关于检查点有以下需要注意：</p>
-<ol>
-<li>同一个模型的不同检查点可以对应不同的任务。也就是说，可以通过指定检查点的方式匹配对应的下游任务。</li>
-<li>检查点本质和config文件一样，就是参数。</li>
-</ol>
-<p>在模型输入的部分，并不涉及embedding。而是将一个句子拆成tokens，且每一个token用一个数字作为索引。至于将一个token转化为一个向量，是后面embedding的工作。这里只是对句子做拆分，添加开始结束标记。</p>
-<p>例如：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sequences = [<span class="string">&quot;Hello!&quot;</span>, <span class="string">&quot;Cool.&quot;</span>, <span class="string">&quot;Nice!&quot;</span>]</span><br><span class="line">encoded_sequences = [</span><br><span class="line">    [<span class="number">101</span>, <span class="number">7592</span>, <span class="number">999</span>, <span class="number">102</span>],</span><br><span class="line">    [<span class="number">101</span>, <span class="number">4658</span>, <span class="number">1012</span>, <span class="number">102</span>],</span><br><span class="line">    [<span class="number">101</span>, <span class="number">3835</span>, <span class="number">999</span>, <span class="number">102</span>],</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>可以看出，101表示开始，102表示结束，999表示！，1012表示.。其他的7592、4658、3835才是单词对应的数字索引。有些句子可能会出现token量和单词数量不等的情况，是因为token不是简单的分割，而是对单词进行了一些处理，比如分割前后缀等。无论如何，在这一步一个token对应一个数字而不是一个多维向量。</p>
-<h1 id="标记器"><a href="#标记器" class="headerlink" title="标记器"></a>标记器</h1><p>标记器也是可以训练并保存的。from_pretrained和save_pretrained。</p>
-<p>标记器是model的其中一步，只不过也可以单独引用。</p>
-<p>分词的命令是：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> transformers <span class="keyword">import</span> AutoTokenizer</span><br><span class="line"></span><br><span class="line">tokenizer = AutoTokenizer.from_pretrained(<span class="string">&quot;bert-base-cased&quot;</span>)</span><br><span class="line"></span><br><span class="line">sequence = <span class="string">&quot;Using a Transformer network is simple&quot;</span></span><br><span class="line">tokens = tokenizer.tokenize(sequence)</span><br><span class="line">————————————————————</span><br><span class="line">tokens=[<span class="string">&#x27;Using&#x27;</span>, <span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;transform&#x27;</span>, <span class="string">&#x27;##er&#x27;</span>, <span class="string">&#x27;network&#x27;</span>, <span class="string">&#x27;is&#x27;</span>, <span class="string">&#x27;simple&#x27;</span>]</span><br></pre></td></tr></table></figure>
-
-<p>上文提到的一个token转化为一个id的命令是：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ids = tokenizer.convert_tokens_to_ids(tokens)</span><br></pre></td></tr></table></figure>
-
-<p>标记器有三个输出：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">tokenizer(<span class="string">&quot;Using a Transformer network is simple&quot;</span>)</span><br><span class="line">&#123;<span class="string">&#x27;input_ids&#x27;</span>: [<span class="number">101</span>, <span class="number">7993</span>, <span class="number">170</span>, <span class="number">11303</span>, <span class="number">1200</span>, <span class="number">2443</span>, <span class="number">1110</span>, <span class="number">3014</span>, <span class="number">102</span>],</span><br><span class="line"> <span class="string">&#x27;token_type_ids&#x27;</span>: [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>],</span><br><span class="line"> <span class="string">&#x27;attention_mask&#x27;</span>: [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>]&#125;</span><br></pre></td></tr></table></figure>
-
-<p><code>token_type_ids</code>用于区分输入序列中的不同部分，使得模型能够知道序列中的标记属于哪个部分。</p>
-<h1 id="处理多个序列"><a href="#处理多个序列" class="headerlink" title="处理多个序列"></a>处理多个序列</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ids = tokenizer.convert_tokens_to_ids(tokens)</span><br><span class="line">input_ids = torch.tensor(ids)</span><br></pre></td></tr></table></figure>
-
-<p>ids可以直接作为model()的输入参数。但model的参数为多个序列，即多个句子。所以要想让单个句子作为输入时，需要添加维度：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Before:[ 1045,  1005,  2310,  2042,  3403,  2005,  1037, 17662, 12172,  2607, 2026,  2878,  2166,  1012]</span><br><span class="line">input_ids = torch.tensor([ids])</span><br><span class="line">After:[[ 1045,  1005,  2310,  2042,  3403,  2005,  1037, 17662, 12172,  2607, 2026,  2878,  2166,  1012]]</span><br></pre></td></tr></table></figure>
-
-<h2 id="填充输入"><a href="#填充输入" class="headerlink" title="填充输入"></a>填充输入</h2><p>假如同时输入两个以上序列，需要保证序列长度相等；长度不够的需要进行填充：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">padding_id = <span class="number">100</span></span><br><span class="line"></span><br><span class="line">batched_ids = [</span><br><span class="line">    [<span class="number">200</span>, <span class="number">200</span>, <span class="number">200</span>],</span><br><span class="line">    [<span class="number">200</span>, <span class="number">200</span>, padding_id],</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
-
-<p>还可以用tokenizer.pad_token_id进行填充：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">model = AutoModelForSequenceClassification.from_pretrained(checkpoint)</span><br><span class="line"></span><br><span class="line">sequence1_ids = [[<span class="number">200</span>, <span class="number">200</span>, <span class="number">200</span>]]</span><br><span class="line">sequence2_ids = [[<span class="number">200</span>, <span class="number">200</span>]]</span><br><span class="line">batched_ids = [</span><br><span class="line">    [<span class="number">200</span>, <span class="number">200</span>, <span class="number">200</span>],</span><br><span class="line">    [<span class="number">200</span>, <span class="number">200</span>, tokenizer.pad_token_id],</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(model(torch.tensor(sequence1_ids)).logits)</span><br><span class="line">tensor([[ <span class="number">1.5694</span>, -<span class="number">1.3895</span>]], grad_fn=&lt;AddmmBackward&gt;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(model(torch.tensor(sequence2_ids)).logits)</span><br><span class="line">tensor([[ <span class="number">0.5803</span>, -<span class="number">0.4125</span>]], grad_fn=&lt;AddmmBackward&gt;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(model(torch.tensor(batched_ids)).logits)</span><br><span class="line">tensor([[ <span class="number">1.5694</span>, -<span class="number">1.3895</span>],</span><br><span class="line">        [ <span class="number">1.3373</span>, -<span class="number">1.2163</span>]], grad_fn=&lt;AddmmBackward&gt;)</span><br></pre></td></tr></table></figure>
-
-<p>由结果可以看出，进行充填前后，sequence2_ids.logits的值不同。</p>
-<blockquote>
-<p>这是因为Transformer模型的关键特性是关注层，它将每个标记上下文化。这些将考虑填充标记，因为它们涉及序列中的所有标记。为了在通过模型传递不同长度的单个句子时，或者在传递一批应用了相同句子和填充的句子时获得相同的结果，我们需要告诉这些注意层忽略填充标记。这是通过使用 <strong>attention mask</strong>来实现的。</p>
-</blockquote>
-<p>输入参数为句子时的充填参数：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model_inputs = tokenizer(sequences, padding=<span class="string">&quot;longest&quot;</span>)</span><br><span class="line">model_inputs = tokenizer(sequences, padding=<span class="string">&quot;max_length&quot;</span>, max_length=<span class="number">8</span>)</span><br><span class="line"><span class="comment">#max_length=8选填</span></span><br></pre></td></tr></table></figure>
-
-<p>截断序列：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sequences = [&quot;I&#x27;ve been waiting for a HuggingFace course my whole life.&quot;, &quot;So have I!&quot;]</span><br><span class="line"></span><br><span class="line"># Will truncate the sequences that are longer than the model max length</span><br><span class="line"># (512 for BERT or DistilBERT)</span><br><span class="line">model_inputs = tokenizer(sequences, truncation=True)</span><br><span class="line"></span><br><span class="line"># Will truncate the sequences that are longer than the specified max length</span><br><span class="line">model_inputs = tokenizer(sequences, max_length=8, truncation=True)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h2 id="AttentionMask注意力面具"><a href="#AttentionMask注意力面具" class="headerlink" title="AttentionMask注意力面具"></a>AttentionMask注意力面具</h2><p>在上例中加入attention_mask：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">batched_ids = [</span><br><span class="line">    [<span class="number">200</span>, <span class="number">200</span>, <span class="number">200</span>],</span><br><span class="line">    [<span class="number">200</span>, <span class="number">200</span>, tokenizer.pad_token_id],</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">attention_mask = [</span><br><span class="line">    [<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>],</span><br><span class="line">    [<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>],</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">outputs = model(torch.tensor(batched_ids), attention_mask=torch.tensor(attention_mask))</span><br><span class="line"><span class="built_in">print</span>(outputs.logits)</span><br><span class="line">tensor([[ <span class="number">1.5694</span>, -<span class="number">1.3895</span>],</span><br><span class="line">        [ <span class="number">0.5803</span>, -<span class="number">0.4125</span>]], grad_fn=&lt;AddmmBackward&gt;)</span><br></pre></td></tr></table></figure>
-
-<p>可以看出这里sequence2_ids.logits为[ 0.5803, -0.4125]，与单独计算sequence2_ids.logits时值相同。</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/04/22/HuggingFace%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95-%E7%AC%AC%E4%BA%8C%E7%AB%A0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
